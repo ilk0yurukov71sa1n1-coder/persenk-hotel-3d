@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persenk Spa Hotel | Official Site</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color: #0a0a0a;
+            font-family: 'Cinzel', serif;
+            color: #fff;
+        }
+
+        /* Заден план - Снимката на хотела, покриваща целия екран */
+        .hero-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), url('https://persenk-hotel.vercel.app/image.png') center center no-repeat;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        #ui-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-size: 24px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #d4af37;
+            font-weight: 400;
+        }
+
+        .logo-sub {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #b3b3b3;
+            margin-top: 5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            opacity: 0.75;
+        }
+
+        nav ul li a:hover {
+            color: #d4af37;
+            opacity: 1;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* Минималистичен превключвател за езика */
+        .lang-container {
+            display: flex;
+            gap: 8px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.4);
+        }
+        .lang-link {
+            cursor: pointer;
+            transition: color 0.3s ease;
+            color: rgba(255,255,255,0.4);
+        }
+        .lang-link.active {
+            color: #d4af37;
+            font-weight: 600;
+        }
+        .lang-link:hover {
+            color: #fff;
+        }
+
+        .btn-reserve {
+            background: transparent;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #d4af37;
+            padding: 10px 24px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border-radius: 20px;
+        }
+
+        .btn-reserve:hover {
+            background: #d4af37;
+            color: #000;
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .main-content {
+            max-width: 600px;
+            margin-top: 15vh;
+            margin-bottom: 5vh;
+        }
+
+        .tagline {
+            font-size: 10px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #b3b3b3;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tagline::before {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 1px;
+            background: #d4af37;
+        }
+
+        h1 {
+            font-size: 52px;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        h1 span {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #d4af37;
+            font-size: 46px;
+            margin-top: 5px;
+        }
+
+        .description {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 25px;
+            margin-top: auto;
+        }
+
+        .footer-info {
+            display: flex;
+            gap: 50px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .info-label {
+            font-size: 9px;
+            color: #8c8c8c;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .info-value {
+            font-size: 12px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .stars {
+            color: #d4af37;
+            letter-spacing: 4px;
+            font-size: 10px;
+        }
+
+        /* Тънък, матов стъклен чат бот (Quiet Luxury) */
+        .chat-widget-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99999;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .chat-button-trigger {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            color: #d4af37;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .chat-button-trigger:hover {
+            border-color: #d4af37;
+            transform: scale(1.05);
+        }
+
+        .chat-box-window {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 330px;
+            height: 450px;
+            background: rgba(10, 10, 10, 0.8); 
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 16px;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        .chat-box-header {
+            background: rgba(212, 175, 55, 0.04);
+            padding: 18px;
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-box-close {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.4);
+            cursor: pointer;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        .chat-box-close:hover { color: #d4af37; }
+
+        .chat-box-body {
+            flex: 1;
+            padding: 18px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .chat-bubble {
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 85%;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .bubble-bot {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e0e0e0;
+            align-self: flex-start;
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .bubble-user {
+            background: rgba(212, 175, 55, 0.12);
+            color: #fff;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            align-self: flex-end;
+        }
+
+        .chat-box-options {
+            padding: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0,0,0,0.1);
+        }
+
+        .option-click-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #ccc;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .option-click-btn:hover {
+            border-color: #d4af37;
+            color: #fff;
+            background: rgba(212, 175, 55, 0.04);
+        }
+
+        @media (max-width: 768px) {
+            #ui-container { padding: 20px; }
+            nav { display: none; }
+            h1 { font-size: 36px; }
+            h1 span { font-size: 32px; }
+            .footer-info { display: none; }
+            .chat-box-window { width: calc(100% - 40px); right: 20px; bottom: 90px; }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="hero-background"></div>
+
+    <div id="ui-container">
+        <header>
+            <div class="logo-container">
+                <span class="logo-main">Persenk</span>
+                <span class="logo-sub">Hotel</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Начало</a></li>
+                    <li><a href="#about">За нас</a></li>
+                    <li><a href="#rooms">Стаи</a></li>
+                    <li><a href="#spa">СПА Център</a></li>
+                    <li><a href="#contacts">Контакти</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <div class="lang-container">
+                    <span class="lang-link active" id="btn-bg" onclick="changeSiteLang('bg')">BG</span>
+                    <span>|</span>
+                    <span class="lang-link" id="btn-en" onclick="changeSiteLang('en')">EN</span>
+                </div>
+                <button class="btn-reserve">Резервирай престой</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="tagline">Five Star Spa Hotel . Devin . Bulgaria</div>
+            <h1>Persenk <span>Spa Hotel</span></h1>
+            <div class="description">
+                Luxury reimagined 2026. Rhodope Mountains.
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-info">
+                <div class="info-item">
+                    <span class="info-label">Location</span>
+                    <span class="info-value">Devin, Bulgaria</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Experience</span>
+                    <span class="info-value">5 Star Luxury SPA</span>
+                </div>
+            </div>
+            <div class="stars">★★★★★</div>
+        </footer>
+    </div>
+
+    <div class="chat-widget-container">
+        <button class="chat-button-trigger" onclick="toggleChatWindow()">✨</button>
+        <div class="chat-box-window" id="hotelChatWindow">
+            <div class="chat-box-header">
+                <span id="chatTitle">Рецепция Персенк</span>
+                <button class="chat-box-close" onclick="toggleChatWindow()">×</button>
+            </div>
+            <div class="chat-box-body" id="hotelChatBody">
+                <div class="chat-bubble bubble-bot" id="chatGreet">
+                    Здравейте! Добре дошли в петзвездния СПА Хотел Персенк. С какво мога да улесня престоя Ви днес?
+                </div>
+            </div>
+            <div class="chat-box-options" id="hotelChatOptions"></div>
+        </div>
+    </div>
+
+    <script>
+        let activeLanguage = 'bg';
+
+        const dictionary = {
+            "Начало": "Home",
+            "За нас": "About Us",
+            "Стаи": "Rooms",
+            "СПА Център": "SPA Center",
+            "Контакти": "Contacts",
+            "Резервирай престой": "Reserve Stay"
+        };
+
+        const botBrain = {
+            bg: [
+                { q: "💎 Минерална вода", a: "Хотелът разполага с директна девинска минерална вода във всички басейни, изключително лековита за тялото." },
+                { q: "👑 Термална зона", a: "На разположение са финландска сауна, парна баня, джакузи и ексклузивни спа ритуали." },
+                { q: "🥂 VIP Настаняване", a: "За резервации на луксозни апартаменти, моля свържете се с нас директно на тел: +359 888 XXX XXX." }
+            ],
+            en: [
+                { q: "💎 Mineral Water", a: "The hotel features direct natural Devin mineral water in all swimming pools, highly beneficial for body revitalization." },
+                { q: "👑 Thermal Zone", a: "Indulge in our Finnish sauna, steam baths, jacuzzi, and curated five-star wellness treatments." },
+                { q: "🥂 VIP Suites", a: "For exclusive suite availability and personalized booking, please contact concierge at: +359 888 XXX XXX." }
+            ]
+        };
+
+        function toggleChatWindow() {
+            const w = document.getElementById('hotelChatWindow');
+            w.style.display = (w.style.display === 'flex') ? 'none' : 'flex';
+            if(w.style.display === 'flex') renderChatOptions();
+        }
+
+        function renderChatOptions() {
+            const container = document.getElementById('hotelChatOptions');
+            container.innerHTML = '';
+            botBrain[activeLanguage].forEach(item => {
+                const b = document.createElement('button');
+                b.className = 'option-click-btn';
+                b.innerText = item.q;
+                b.onclick = () => askBot(item.q, item.a);
+                container.appendChild(b);
+            });
+        }
+
+        function askBot(question, answer) {
+            const body = document.getElementById('hotelChatBody');
+            const uDiv = document.createElement('div');
+            uDiv.className = 'chat-bubble bubble-user';
+            uDiv.innerText = question;
+            body.appendChild(uDiv);
+            
+            setTimeout(() => {
+                const bDiv = document.createElement('div');
+                bDiv.className = 'chat-bubble bubble-bot';
+                bDiv.innerText = answer;
+                body.appendChild(bDiv);
+                body.scrollTop = body.scrollHeight;
+            }, 300);
+        }
+
+        function changeSiteLang(lang) {
+            activeLanguage = lang;
+            document.getElementById('btn-bg').classList.remove('active');
+            document.getElementById('btn-en').classList.remove('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+            
+            const title = document.getElementById('chatTitle');
+            const greet = document.getElementById('chatGreet');
+            
+            if(lang === 'en') {
+                title.innerText = "Persenk Concierge";
+                greet.innerText = "Welcome to the five-star Spa Hotel Persenk. How may I assist you with your luxury stay today?";
+            } else {
+                title.innerText = "Рецепция Персенк";
+                greet.innerText = "Здравейте! Добре дошли в петзвездния СПА Хотел Персенк. С какво мога да улесня престоя Ви днес?";
+            }
+            renderChatOptions();
+
+            const links = document.querySelectorAll('nav ul li a, .btn-reserve');
+            links.forEach(el => {
+                let text = el.innerText.trim();
+                if (lang === 'en') {
+                    if (dictionary[text]) {
+                        if (!el.getAttribute('data-orig')) el.setAttribute('data-orig', text);
+                        el.innerText = dictionary[text];
+                    }
+                } else {
+                    if (el.getAttribute('data-orig')) {
+                        el.innerText = el.getAttribute('data-orig');
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
