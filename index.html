@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PERSENK — Five Star Spa Hotel · Rhodope Mountains</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g: #b8914a;
+  --gl: #d4ac6e;
+  --gp: rgba(184,145,74,0.12);
+  --gd: rgba(184,145,74,0.02);
+  --k: #030308;
+  --w: #f0ead8;
+  --wm: rgba(240,234,216,0.6);
+  --f: 'Montserrat', sans-serif;
+  --f2: 'Cormorant Garamond', serif;
+  --f3: 'Cinzel', serif;
+  /* Ултра чист стъклен ефект */
+  --glass: rgba(5, 5, 12, 0.4);
+  --glass-border: rgba(184, 145, 74, 0.15);
+  --glass-blur: blur(12px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--k); color: var(--w); font-family: var(--f); overflow-x: hidden; font-weight: 300; line-height: 1.6; }
+a { color: inherit; text-decoration: none; }
+li { list-style: none; }
+img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ─── NAV (ПРОЗРАЧЕН С ТЪНЪК КАНТ) ─── */
+nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); border-bottom: 1px solid rgba(184,145,74,0.05); background: linear-gradient(to bottom, rgba(3,3,8,0.7), transparent); }
+nav.solid { padding: 15px 5%; background: var(--glass); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--glass-border); }
+.logo { font-family: var(--f3); font-size: 24px; letter-spacing: 6px; font-weight: 500; color: var(--w); }
+.logo span { color: var(--g); }
+.nav-links { display: flex; gap: 35px; align-items: center; }
+.nav-links a { font-size: 11px; letter-spacing: 3px; font-weight: 400; text-transform: uppercase; transition: color 0.3s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: var(--g); transition: width 0.3s; }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--gl); }
+
+/* Language Switcher */
+.lang-switcher { display: flex; gap: 8px; font-size: 11px; letter-spacing: 1px; margin-left: 20px; border-left: 1px solid rgba(240,234,216,0.15); padding-left: 20px; }
+.lang-btn { background: none; border: none; color: var(--wm); cursor: pointer; font-family: var(--f); font-weight: 400; transition: color 0.3s; padding: 2px 5px; text-transform: uppercase; }
+.lang-btn.active { color: var(--g); font-weight: 600; }
+
+/* ─── HERO ─── */
+#hero { position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+#hbg { position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 1; transition: opacity 2s ease; opacity: 0; transform: scale(1.05); }
+#hbg.z { opacity: 0.55; }
+.h-overlay { position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 10%, var(--k) 85%), linear-gradient(to top, var(--k), transparent 50%); z-index: 2; }
+.h-content { position: relative; z-index: 3; max-width: 900px; padding: 0 20px; transform: translateY(40px); opacity: 0; animation: fUp 2s cubic-bezier(0.16,1,0.3,1) forwards 0.6s; }
+@keyframes fUp { to { transform: translateY(0); opacity: 1; } }
+.h-content h2 { font-family: var(--f2); font-size: 22px; font-style: italic; color: var(--g); letter-spacing: 3px; margin-bottom: 20px; font-weight: 300; }
+.h-content h1 { font-family: var(--f3); font-size: clamp(34px, 6vw, 72px); font-weight: 400; letter-spacing: 14px; text-transform: uppercase; margin-bottom: 35px; line-height: 1.2; background: linear-gradient(to right, #fff, #f0ead8, #d4ac6e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.btn { display: inline-block; padding: 15px 38px; border: 1px solid var(--g); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; background: rgba(184,145,74,0.03); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; color: var(--w); position: relative; z-index: 1; }
+.btn:hover { background: var(--g); color: var(--k); box-shadow: 0 15px 40px rgba(184,145,74,0.25); transform: translateY(-3px); }
+
+/* ─── ЧИСТИ СЕКЦИИ БЕЗ ПЛЪТЕН ФОН ─── */
+.sec { padding: 150px 0; position: relative; z-index: 5; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+.grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 90px; align-items: center; }
+.grid.rev { grid-template-columns: 0.9fr 1.1fr; }
+.text-side { padding-right: 20px; }
+.grid.rev .text-side { padding-right: 0; padding-left: 20px; }
+.tag { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--g); margin-bottom: 22px; font-weight: 500; display: block; }
+.title { font-family: var(--f3); font-size: clamp(28px, 4vw, 44px); font-weight: 400; letter-spacing: 4px; margin-bottom: 30px; line-height: 1.3; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+.desc { font-family: var(--f2); font-size: 20px; color: #d0caba; margin-bottom: 45px; font-weight: 300; text-align: justify; line-height: 1.7; }
+
+/* СТЪКЛЕНИ РАМКИ ЗА СНИМКИТЕ — МАКСИМАЛЕН ФОКУС */
+.img-side { position: relative; height: 580px; border: 1px solid var(--glass-border); padding: 12px; background: rgba(255, 255, 255, 0.01); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); transition: all 0.6s ease; }
+.img-wrap { width: 100%; height: 100%; overflow: hidden; position: relative; }
+.img-wrap img { transform: scale(1.01); transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.img-side:hover .img-wrap img { transform: scale(1.06); }
+.img-side:hover { border-color: rgba(184,145,74,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.img-side::before { content: ''; position: absolute; top: -8px; left: -8px; width: 24px; height: 24px; border-top: 2px solid var(--g); border-left: 2px solid var(--g); }
+.img-side::after { content: ''; position: absolute; bottom: -8px; right: -8px; width: 24px; height: 24px; border-bottom: 2px solid var(--g); border-right: 2px solid var(--g); }
+
+/* ─── BACKGROUND CANVAS EFFECT ─── */
+#bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.7; }
+
+/* ─── АНИМАЦИИ ПРИ СКРОЛВАНЕ ─── */
+.rv { opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.rl { opacity: 0; transform: translateX(-50px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.rr { opacity: 0; transform: translateX(50px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.rv.in, .rl.in, .rr.in { opacity: 1; transform: none; }
+
+/* ─── ULTRACLEAN GLASS CHATBOT ─── */
+#bot-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; font-family: var(--f); display: flex; flex-direction: column; align-items: flex-end; }
+#bot-trigger { width: 60px; height: 60px; border-radius: 50%; background: var(--glass); border: 1px solid var(--g); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 10px 30px rgba(184,145,74,0.2); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); }
+#bot-trigger:hover { transform: scale(1.08) rotate(15deg); background: var(--g); }
+#bot-trigger svg { width: 26px; height: 26px; fill: var(--w); transition: fill 0.3s; }
+#bot-trigger:hover svg { fill: var(--k); }
+#bot-window { width: 360px; height: 480px; background: rgba(5, 5, 12, 0.75); border: 1px solid var(--glass-border); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow: hidden; margin-bottom: 15px; transform: translateY(30px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+#bot-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+.bot-header { padding: 20px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; background: rgba(184,145,74,0.04); }
+.bot-header h3 { font-family: var(--f3); font-size: 14px; letter-spacing: 2px; font-weight: 500; color: #fff; }
+.bot-header h3 span { font-size: 9px; display: block; color: var(--g); letter-spacing: 1px; font-family: var(--f); margin-top: 2px; }
+.bot-close { background: none; border: none; color: var(--wm); font-size: 20px; cursor: pointer; transition: color 0.3s; }
+.bot-close:hover { color: var(--g); }
+.bot-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; font-size: 13px; scroll-behavior: smooth; }
+.msg { max-width: 80%; padding: 12px 16px; border-radius: 8px; line-height: 1.5; text-align: justify; }
+.msg.bot { background: rgba(240,234,216,0.06); border: 1px solid rgba(240,234,216,0.1); border-top-left-radius: 2px; color: #fff; }
+.msg.user { background: rgba(184,145,74,0.15); border: 1px solid rgba(184,145,74,0.3); border-top-right-radius: 2px; color: var(--w); align-self: flex-end; }
+.bot-input-area { padding: 15px; border-top: 1px solid var(--glass-border); display: flex; gap: 10px; background: rgba(5,5,12,0.4); }
+.bot-input-area input { flex: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(240,234,216,0.15); padding: 12px; border-radius: 6px; color: #fff; font-family: var(--f); font-size: 13px; transition: all 0.3s; }
+.bot-input-area input:focus { outline: none; border-color: var(--g); background: rgba(255,255,255,0.06); }
+.bot-send { background: none; border: 1px solid var(--g); color: var(--g); padding: 0 18px; border-radius: 6px; cursor: pointer; font-family: var(--f); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s; }
+.bot-send:hover { background: var(--g); color: var(--k); }
+
+/* ─── FOOTER ─── */
+footer { background: rgba(3,3,8,0.85); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-top: 1px solid var(--glass-border); padding: 90px 0 40px; position: relative; z-index: 5; font-size: 13px; color: var(--wm); }
+.f-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+.f-about h3 { font-family: var(--f3); font-size: 20px; letter-spacing: 4px; color: #fff; margin-bottom: 20px; }
+.f-links h4, .f-contact h4 { font-family: var(--f3); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--g); margin-bottom: 25px; }
+.f-links li { margin-bottom: 12px; }
+.f-links a { transition: color 0.3s; }
+.f-links a:hover { color: var(--gl); }
+.f-contact p { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.f-bottom { border-top: 1px solid rgba(240,234,216,0.05); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; letter-spacing: 1px; }
+
+@media (max-width: 968px) {
+  nav { padding: 20px 5%; }
+  .nav-links { display: none; }
+  .grid, .grid.rev { grid-template-columns: 1fr; gap: 60px; }
+  .text-side, .grid.rev .text-side { padding: 0; }
+  .img-side { height: 420px; }
+  .f-grid { grid-template-columns: 1fr; gap: 40px; }
+  .f-bottom { flex-direction: column; gap: 15px; text-align: center; }
+  #bot-window { width: calc(100vw - 40px); right: 20px; height: 400px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<nav id="nav">
+  <div class="logo">PERSENK<span>·</span></div>
+  <div class="nav-links">
+    <a href="#hero" data-text-key="navHome"></a>
+    <a href="#rooms" data-text-key="navRooms"></a>
+    <a href="#spa" data-text-key="navSpa"></a>
+    <a href="#dining" data-text-key="navDining"></a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="bg" onclick="setLanguage('bg')">BG</button>
+      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <img id="hbg" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80" alt="Persenk Cover">
+  <div class="h-overlay"></div>
+  <div class="h-content">
+    <h2 data-text-key="heroSub"></h2>
+    <h1 data-text-key="heroTitle"></h1>
+    <a href="#rooms" class="btn" data-text-key="heroBtn"></a>
+  </div>
+</section>
+
+<section id="rooms" class="sec">
+  <div class="container">
+    <div class="grid">
+      <div class="text-side rl">
+        <span class="tag" data-text-key="roomsTag"></span>
+        <h3 class="title" data-text-key="roomsTitle"></h3>
+        <p class="desc" data-text-key="roomsDesc"></p>
+        <a href="#" class="btn" data-text-key="roomsBtn"></a>
+      </div>
+      <div class="img-side rr">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1000&q=80" alt="Rooms">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="spa" class="sec">
+  <div class="container">
+    <div class="grid rev">
+      <div class="img-side rl">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" alt="Spa">
+        </div>
+      </div>
+      <div class="text-side rr">
+        <span class="tag" data-text-key="spaTag"></span>
+        <h3 class="title" data-text-key="spaTitle"></h3>
+        <p class="desc" data-text-key="spaDesc"></p>
+        <a href="#" class="btn" data-text-key="spaBtn"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dining" class="sec">
+  <div class="container">
+    <div class="grid">
+      <div class="text-side rl">
+        <span class="tag" data-text-key="diningTag"></span>
+        <h3 class="title" data-text-key="diningTitle"></h3>
+        <p class="desc" data-text-key="diningDesc"></p>
+        <a href="#" class="btn" data-text-key="diningBtn"></a>
+      </div>
+      <div class="img-side rr">
+        <div class="img-wrap">
+          <img id="rtbg" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80" alt="Dining">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="bot-container">
+  <div id="bot-window">
+    <div class="bot-header">
+      <h3 id="bot-title">PERSENK AI Concierge<span>Online Assistant</span></h3>
+      <button class="bot-close" onclick="toggleBot()">×</button>
+    </div>
+    <div class="bot-messages" id="bot-messages">
+      </div>
+    <div class="bot-input-area">
+      <input type="text" id="bot-input" placeholder="Type a message...">
+      <button class="bot-send" onclick="sendBotMsg()" id="bot-send-btn">Send</button>
+    </div>
+  </div>
+  <div id="bot-trigger" onclick="toggleBot()">
+    <svg viewBox="0 0 24 24">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/>
+      <circle cx="8" cy="9" r="1.5"/><circle cx="12" cy="9" r="1.5"/><circle cx="16" cy="9" r="1.5"/>
+    </svg>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="f-grid">
+      <div class="f-about">
+        <h3>PERSENK<span>.</span></h3>
+        <p data-text-key="footerAbout"></p>
+      </div>
+      <div class="f-links">
+        <h4 data-text-key="footerLinksTitle"></h4>
+        <ul>
+          <li><a href="#hero" data-text-key="navHome"></a></li>
+          <li><a href="#rooms" data-text-key="navRooms"></a></li>
+          <li><a href="#spa" data-text-key="navSpa"></a></li>
+          <li><a href="#dining" data-text-key="navDining"></a></li>
+        </ul>
+      </div>
+      <div class="f-contact">
+        <h4 data-text-key="footerContactTitle"></h4>
+        <p>📍 Девин, ул. Дружба 10</p>
+        <p>📞 +359 301 6 3000</p>
+        <p>✉️ office@persenk.bg</p>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p>&copy; 2026 Hotel Persenk. All Rights Reserved.</p>
+      <p data-text-key="footerMadeBy"></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── ДИНАМИЧНО СЪДЪРЖАНИЕ (ТЕКСТОВЕ & ПРЕВОДИ) ───
+window.SITE_CONTENT = {
+  bg: {
+    navHome: "Начало",
+    navRooms: "Стаи & Суити",
+    navSpa: "СПА Център",
+    navDining: "Ресторанти",
+    heroSub: "Петзвездно луксозно изживяване",
+    heroTitle: "ХОТЕЛ ПЕРСЕНК<br>ДЕВИН",
+    heroBtn: "Открийте Още",
+    roomsTag: "Изтънчен Престой",
+    roomsTitle: "Стаи и Апартаменти с Панорамна Гледка",
+    roomsDesc: "Всеки детайл в нашите стаи е проектиран с мисъл за вашия абсолютен комфорт. Комбинация от класическа елегантност, съвременни удобства и спиращи дъха гледки към вековните Родопски гори.",
+    roomsBtn: "Разгледайте Стаите",
+    spaTag: "Минерално Съвършенство",
+    spaTitle: "Термален & Уелнес Център от Световна Класа",
+    spaDesc: "Потопете се в лечебната сила на девинската минерална вода. Нашият СПА център предлага ексклузивни терапии, модерни сауни, парни бани и басейни, създадени да възстановят баланса на тялото и ума.",
+    spaBtn: "Вижте СПА Менюто",
+    diningTag: "Кулинарно Изкуство",
+    diningTitle: "Ресторанти, Покривна Тераса & Нощен Бар",
+    diningDesc: "От традиционни родопски специалитети до изискана интернационална кухня. Насладете се на авторски коктейли на нашата панорамна покривна тераса или завършете вечерта с първокласно изживяване в нощния бар.",
+    diningBtn: "Резервирайте Маса",
+    footerAbout: "Петзвезден луксозен спа хотел в сърцето на величествените Родопи. Изцяло реновиран и отворил врати през юли 2025 г. — новият стандарт в планинското гостоприемство.",
+    footerLinksTitle: "Навигация",
+    footerContactTitle: "Контакти",
+    footerMadeBy: "Дизайн и разработка: Devin Digital",
+    botWelcome: "Приветствам Ви в хотел Персенк 5★! Аз съм Вашият виртуален асистент. Как мога да Ви помогна днес?",
+    botInputPlaceholder: "Задайте въпрос...",
+    botSend: "Виж",
+    botTitleText: "ПЕРСЕНК AI Асистент<span>Онлайн рецепция</span>"
+  },
+  en: {
+    navHome: "Home",
+    navRooms: "Rooms & Suites",
+    navSpa: "Spa Center",
+    navDining: "Dining",
+    heroSub: "Five-Star Luxury Experience",
+    heroTitle: "HOTEL PERSENK<br>DEVIN",
+    heroBtn: "Discover More",
+    roomsTag: "Refined Stay",
+    roomsTitle: "Rooms & Suites with Panoramic Views",
+    roomsDesc: "Every detail in our rooms is designed with your absolute comfort in mind. A seamless combination of classical elegance, modern amenities, and breathtaking views of the ancient Rhodope forests.",
+    roomsBtn: "View Our Rooms",
+    spaTag: "Mineral Perfection",
+    spaTitle: "World-Class Thermal & Wellness Center",
+    spaDesc: "Immerse yourself in the healing power of Devin's mineral water. Our Spa center offers exclusive therapies, state-of-the-art saunas, steam baths, and pools designed to restore balance to body and soul.",
+    spaBtn: "Explore Spa Menu",
+    diningTag: "Culinary Art",
+    diningTitle: "Restaurants, Rooftop Terrace & Night Bar",
+    diningDesc: "From traditional local specialties to fine international cuisine. Enjoy signature cocktails on our panoramic rooftop terrace or end the evening with a premium experience at the stylish night bar.",
+    diningBtn: "Book a Table",
+    footerAbout: "Five-star luxury spa hotel in the heart of the majestic Rhodope Mountains. Completely renovated and reopened in July 2025 — a new benchmark in mountain hospitality.",
+    footerLinksTitle: "Navigation",
+    footerContactTitle: "Contact Us",
+    footerMadeBy: "Design & Development: Devin Digital",
+    botWelcome: "Welcome to Hotel Persenk 5★! I am your AI Concierge. How may I assist you with your luxury stay today?",
+    botInputPlaceholder: "Ask a question...",
+    botSend: "Send",
+    botTitleText: "PERSENK AI Concierge<span>Online Reception</span>"
+  }
+};
+
+let currentLang = 'bg';
+
+// ─── ДИНАМИЧНО СМЕНЯНЕ НА ЕЗИЦИТЕ ───
+function setLanguage(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+
+  const elements = document.querySelectorAll('[data-text-key]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-text-key');
+    if (window.SITE_CONTENT[lang] && window.SITE_CONTENT[lang][key]) {
+      el.style.opacity = 0.3;
+      setTimeout(() => {
+        el.innerHTML = window.SITE_CONTENT[lang][key];
+        el.style.opacity = 1;
+      }, 100);
+    }
+  });
+
+  // Обновяване на текстовете на бота
+  document.getElementById('bot-title').innerHTML = window.SITE_CONTENT[lang].botTitleText;
+  document.getElementById('bot-input').placeholder = window.SITE_CONTENT[lang].botInputPlaceholder;
+  document.getElementById('bot-send-btn').innerText = window.SITE_CONTENT[lang].botSend;
+  
+  // Рестартиране на поздрава в чата
+  const msgs = document.getElementById('bot-messages');
+  msgs.innerHTML = `<div class="msg bot">${window.SITE_CONTENT[lang].botWelcome}</div>`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setLanguage('bg');
+});
+
+// ─── ИНТЕЛЕГЕНТНА ЛОКАЛНА СИМУЛАЦИЯ НА ЧАТБОТ ───
+function toggleBot() {
+  document.getElementById('bot-window').classList.toggle('open');
+}
+
+document.getElementById('bot-input').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') sendBotMsg();
+});
+
+function sendBotMsg() {
+  const input = document.getElementById('bot-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const msgsContainer = document.getElementById('bot-messages');
+
+  // Добавяне на потребителско съобщение
+  msgsContainer.innerHTML += `<div class="msg user">${text}</div>`;
+  input.value = '';
+  msgsContainer.scrollTop = msgsContainer.scrollHeight;
+
+  // AI Логика за автоматични отговори на база ключови думи
+  setTimeout(() => {
+    let reply = "";
+    const cleanText = text.toLowerCase();
+
+    if (currentLang === 'bg') {
+      if (cleanText.includes('басейн') || cleanText.includes('минерал') || cleanText.includes('voda') || cleanText.includes('вода')) {
+        reply = "Хотел Персенк разполага с вътрешни басейни с чиста девинска минерална вода, чиято температура се поддържа около 32-35°C, перфектна за терапия и релакс.";
+      } else if (cleanText.includes('спа') || cleanText.includes('spa') || cleanText.includes('сауна') || cleanText.includes('масаж')) {
+        reply = "Нашият термален център включва финландска сауна, инфрачервена сауна, парна баня, турска баня (хамам) и богато меню от авторски родопски и екзотични масажи.";
+      } else if (cleanText.includes('ресторант') || cleanText.includes('храна') || cleanText.includes('закуска') || cleanText.includes('вечеря')) {
+        reply = "На Ваше разположение са ресторант 'Персенк', предлагащ изискана кухня, панорамна покривна тераса със спиращи дъха коктейли и изискан нощен бар.";
+      } else if (cleanText.includes('цена') || cleanText.includes('резервац') || cleanText.includes('стая') || cleanText.includes('настаняване')) {
+        reply = "Всички стаи предлагат 5-звезден лукс. За актуални цени, специални пакети и директни резервации, моля свържете се с рецепция на телефон +359 301 6 3000.";
+      } else {
+        reply = "Благодаря Ви за въпроса! Като Ваш 5-звезден консиерж, ще предам Вашето запитване директно на колегите от рецепция. Може да ни пишете и на office@persenk.bg.";
+      }
+    } else {
+      // Английски език
+      if (cleanText.includes('pool') || cleanText.includes('mineral') || cleanText.includes('water')) {
+        reply = "Hotel Persenk features indoor thermal pools filled with pure Devin mineral water, maintained at a relaxing 32-35°C year-round.";
+      } else if (cleanText.includes('spa') || cleanText.includes('sauna') || cleanText.includes('massage')) {
+        reply = "Our world-class spa facility includes Finnish & Infrared saunas, a steam bath, a traditional Hammam, and an extensive menu of signature wellness treatments.";
+      } else if (cleanText.includes('restaurant') || cleanText.includes('food') || cleanText.includes('dinner') || cleanText.includes('breakfast')) {
+        reply = "Indulge in culinary art at the main Persenk Restaurant, enjoy signature drinks on our Panoramic Rooftop Terrace, or experience nightlife at our exclusive Night Bar.";
+      } else if (cleanText.includes('price') || cleanText.includes('book') || cleanText.includes('room') || cleanText.includes('reservation')) {
+        reply = "For current luxury packages, suite availability, and instant bookings, please reach out to our front desk directly at office@persenk.bg or call +359 301 6 3000.";
+      } else {
+        reply = "Thank you for reaching out! As your dedicated AI Concierge, I will pass this note directly to our front desk team. You can also contact us anytime at office@persenk.bg.";
+      }
+    }
+
+    msgsContainer.innerHTML += `<div class="msg bot">${reply}</div>`;
+    msgsContainer.scrollTop = msgsContainer.scrollHeight;
+  }, 700);
+}
+
+// ─── КОСМИЧЕСКИЯТ CANVAS ЕФЕКТ (ОПТИМИЗИРАН И ЛЕК) ───
+const sc=document.getElementById('bg-canvas');
+const cx=sc.getContext('2d');
+let stars=[], shooters=[];
+function res(){ sc.width=window.innerWidth; sc.height=window.innerHeight; }
+res();
+addEventListener('resize',res);
+
+class Star {
+  constructor(){this.reset()}
+  reset(){ this.x=Math.random()*sc.width; this.y=Math.random()*sc.height; this.size=Math.random()*1.3; this.alpha=Math.random(); this.speed=0.03+Math.random()*0.04; }
+  update(){ this.alpha += this.speed; if(this.alpha>1||this.alpha<0) this.speed=-this.speed; }
+  draw(){ cx.fillStyle=`rgba(240,234,216,${Math.abs(this.alpha)})`; cx.fillRect(this.x,this.y,this.size,this.size); }
+}
+
+class Shooter {
+  constructor(){this.active=false}
+  reset(){ this.x=Math.random()*sc.width; this.y=Math.random()*sc.height*0.3; this.len=15+Math.random()*25; this.speed=5+Math.random()*5; this.dx=this.speed; this.dy=this.speed*0.4; this.alpha=1; }
+  update(){ if(!this.active)return; this.x+=this.dx; this.y+=this.dy; this.alpha-=0.025; if(this.alpha<=0)this.active=false; }
+  draw(){ if(!this.active)return; cx.strokeStyle=`rgba(184,145,74,${this.alpha})`; cx.lineWidth=1; cx.beginPath(); cx.moveTo(this.x,this.y); cx.lineTo(this.x-this.len,this.y-this.len*0.4); cx.stroke(); }
+}
+
+for(let i=0;i<70;i++)stars.push(new Star());
+for(let i=0;i<2;i++)shooters.push(new Shooter());
+let lastS=0;
+
+function frame(t){
+  t/=1000;
+  cx.clearRect(0,0,sc.width,sc.height);
+  stars.forEach(s=>{s.update();s.draw()});
+  if(t-lastS>7+Math.random()*12){
+    const sh=shooters.find(s=>!s.active);if(sh){sh.reset();sh.active=true}
+    lastS=t;
+  }
+  shooters.forEach(s=>{s.update();s.draw()});
+  requestAnimationFrame(frame);
+}
+frame();
+
+// ─── NAV АНИМАЦИЯ (ДИНАМИЧНО СТЪКЛО) ───
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>50));
+
+// ─── ИСТИНСКИ ПАРАЛАКС (СНИМКИТЕ СЕ ДВИЖАТ НЕЖНО ПРИ СКРОЛ) ───
+const hbg=document.getElementById('hbg');
+setTimeout(()=>hbg.classList.add('z'),100);
+addEventListener('scroll',()=>{
+  hbg.style.transform=`scale(1.05) translateY(${scrollY*.22}px)`;
+  const rt=document.getElementById('rtbg');
+  if(rt){
+    const r=document.getElementById('dining').getBoundingClientRect();
+    rt.style.transform=`scale(1.03) translateY(${r.top*.08}px)`;
+  }
+});
+
+// ─── REVEAL EFFECT ON SCROLL ───
+const rvEls=document.querySelectorAll('.rv,.rl,.rr');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.08});
+rvEls.forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
